@@ -7,7 +7,7 @@ CREATE TABLE game (
 	game_id bigint generated always as identity,
 	season int,
 	type varchar(1),
-	date_time_gmt timestamp,
+	date_time_GMT timestamp,
 	away_team_id int,
 	home_team_id int,
 	away_goals int,
