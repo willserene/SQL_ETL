@@ -1,9 +1,9 @@
 # Zamboni Zealots
 
 <!-- README -->
-  <h3 align="center">sql-challenge</h3>
+  <h3 align="center">ETL Project</h3>
   <p align="center"> 
-  ETL Project using Hockey Data
+  Let's go get them Ice Biscuits!
     <br />
     <a href="https://github.com/willserene/project-2-zamboni-zealots/issues">Report Bug</a>
     ·
