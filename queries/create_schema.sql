@@ -8,12 +8,12 @@ DROP TABLE IF EXISTS team_info;
 
 CREATE TABLE team_info (
 	"team_id" int,
-	"franchiseld" int,
+	"franchiseId" int,
 	"shortName" varchar(80),
 	"teamName" varchar(80),
 	"abbreviation" varchar(3),
 	"link" varchar(30),
-	PRIMARY KEY (team_id)
+	PRIMARY KEY ("team_id")
 );
 
 
@@ -29,11 +29,11 @@ CREATE TABLE game (
 	"outcome" varchar(255),
 	"home_rink_side_start" varchar(5),
 	"venue" varchar(255),
-	"vanue_link" varchar(255),
+	"venue_link" varchar(255),
 	"venue_time_zone_id" varchar(100),
 	"venue_time_zone_offset" int,
 	"venue_time_zone_tz" varchar(3),
-	PRIMARY KEY (game_id)
+	PRIMARY KEY ("game_id")
 );
 
 
@@ -56,7 +56,7 @@ CREATE TABLE game_plays (
 	"description" varchar(255),
 	"st_x" int,
 	"st_y" int,
-	FOREIGN KEY (game_id) REFERENCES game(game_id)
+	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
 
 
@@ -78,7 +78,7 @@ CREATE TABLE game_teams_stats (
 	"takeaways" int,
 	"blocked" int,
 	"starRinkSide" varchar(5),
-	FOREIGN KEY (game_id) REFERENCES game(game_id)
+	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
 
 
@@ -90,9 +90,12 @@ CREATE TABLE game_scratches (
 
 
 CREATE TABLE game_officials (
-	"game_id" int,  -- foreign key
+	--id serial not null,
+	"game_id" int,
 	"official_name" varchar(100),
-	"official_type" varchar(15)
+	"official_type" varchar(15),
+	--PRIMARY KEY (id),
+	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
 
 
@@ -101,6 +104,6 @@ CREATE TABLE game_shifts (
 	"player_id" int,
 	"period" int,
 	"shift_start" int,
-	"shift_end" int
-	
+	"shift_end" int,
+	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
