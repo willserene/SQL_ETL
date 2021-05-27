@@ -38,16 +38,16 @@ CREATE TABLE game (
 
 
 CREATE TABLE game_plays (
-	"play_id" varchar(20),  -- foreign key (needs table created before assigning it)
-	"game_id" int,  -- foreign key
-	"team_id_for" int,  -- foreign key (needs table created before assigning it)
-	"team_id_against" int,    -- foreign key (needs table created before assigning it)
+	"play_id" varchar(20),
+	"game_id" int,
+	"team_id_for" int,  -- foreign key? team 88 not found when tried
+	"team_id_against" int,    -- foreign key? team 88 not found when tried
 	"event" varchar(50),
 	"secondaryType" varchar(50),
 	"x" int,
 	"y" int,
 	"period" int,
-	"periodType" int,
+	"periodType" varchar(12),
 	"periodTime" int,
 	"periodTimeRemaining" int,
 	"dateTime" timestamp,
@@ -56,6 +56,7 @@ CREATE TABLE game_plays (
 	"description" varchar(255),
 	"st_x" int,
 	"st_y" int,
+	PRIMARY KEY ("play_id"),
 	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
 
@@ -77,7 +78,7 @@ CREATE TABLE game_teams_stats (
 	"giveaways" int,
 	"takeaways" int,
 	"blocked" int,
-	"starRinkSide" varchar(5),
+	"startRinkSide" varchar(5),
 	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
 
@@ -85,12 +86,13 @@ CREATE TABLE game_teams_stats (
 CREATE TABLE game_scratches (
 	"game_id" int,
 	"team_id" int,
-	"player_id" int
+	"player_id" int,  -- needs foreign key after CREATE TABLE
+	FOREIGN KEY ("game_id") REFERENCES game("game_id"),
+	FOREIGN KEY ("team_id") REFERENCES team_info("team_id")
 );
 
 
 CREATE TABLE game_officials (
-	--id serial not null,
 	"game_id" int,
 	"official_name" varchar(100),
 	"official_type" varchar(15),
@@ -101,9 +103,13 @@ CREATE TABLE game_officials (
 
 CREATE TABLE game_shifts (
 	"game_id" int,
-	"player_id" int,
+	"player_id" int,  -- needs foreign key after CREATE TABLE
 	"period" int,
 	"shift_start" int,
 	"shift_end" int,
 	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
+
+
+SELECT *
+FROM game_shifts
