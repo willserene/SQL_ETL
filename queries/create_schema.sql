@@ -1,8 +1,10 @@
+DROP TABLE IF EXISTS game_penalties;
+DROP TABLE IF EXISTS game_skater_stats;
 DROP TABLE IF EXISTS game_shifts;
 DROP TABLE IF EXISTS game_officials;
 DROP TABLE IF EXISTS game_scratches;
-DROP TABLE IF EXISTS game_plays;
 DROP TABLE IF EXISTS game_teams_stats;
+DROP TABLE IF EXISTS game_plays;
 DROP TABLE IF EXISTS game;
 DROP TABLE IF EXISTS team_info;
 
@@ -110,6 +112,34 @@ CREATE TABLE game_shifts (
 	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
 
+CREATE TABLE game_penalties (
+	"play_id" text, -- foreign key
+	"penaltySeverity" text,
+	"penaltyMinutes" int
+);
 
-SELECT *
-FROM game_shifts
+CREATE TABLE game_skater_stats (
+	"game_id" int, -- foreign key
+	"player_id" int, -- foreign key
+	"team_id" int, -- foreign key
+	"timeOnIce" int,
+	"assists" int,
+	"goals" int,
+	"shots" int,
+	"hits" int,
+	"powerPlayGoals" int,
+	"powerPlayAssists" int,
+	"penaltyMinutes" int,
+	"faceOffWins" int,
+	"faceoffTaken" int,
+	"takeaways" int,
+	"giveaways" int,
+	"shortHandedGoals" int,
+	"shortHandedAssists" int,
+	"blocked" int,
+	"plusMinus" int,
+	"evenTimeOnIce" int,
+	"shortHandedTimeOnIce" int,
+	"powerPlayTimeOnIce" int,
+	FOREIGN KEY (game_id) REFERENCES game(game_id)
+);
