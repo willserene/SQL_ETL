@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS game_plays;
 DROP TABLE IF EXISTS game;
 DROP TABLE IF EXISTS team_info;
 
+
 CREATE TABLE team_info (
 	"team_id" int,
 	"franchiseId" int,
