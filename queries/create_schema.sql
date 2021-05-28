@@ -43,25 +43,26 @@ CREATE TABLE game (
 CREATE TABLE game_plays (
 	"play_id" varchar(20),
 	"game_id" int,
-	"team_id_for" int,  -- foreign key? team 88 not found when tried
-	"team_id_against" int,    -- foreign key? team 88 not found when tried
+	"team_id_for" float,  -- foreign key? team 88 not found when tried
+	"team_id_against" float,    -- foreign key? team 88 not found when tried
 	"event" varchar(50),
-	"secondaryType" varchar(50),
-	"x" int,
-	"y" int,
+	"secondarytype" varchar(50),
+	"x" float,
+	"y" float,
 	"period" int,
-	"periodType" varchar(12),
-	"periodTime" int,
-	"periodTimeRemaining" int,
-	"dateTime" timestamp,
+	"periodtype" varchar(12),
+	"periodtime" int,
+	"periodtimeremaining" float,
+	"datetime" timestamp,
 	"goals_away" int,
 	"goals_home" int,
 	"description" varchar(255),
-	"st_x" int,
-	"st_y" int,
+	"st_x" float,
+	"st_y" float,
 	PRIMARY KEY ("play_id"),
 	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
+
 
 
 CREATE TABLE game_teams_stats (
@@ -109,7 +110,7 @@ CREATE TABLE game_shifts (
 	"player_id" int,  -- needs foreign key after CREATE TABLE
 	"period" int,
 	"shift_start" int,
-	"shift_end" int,
+	"shift_end" float,
 	FOREIGN KEY ("game_id") REFERENCES game("game_id")
 );
 
