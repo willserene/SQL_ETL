@@ -13,7 +13,6 @@ DROP TABLE IF EXISTS game;
 DROP TABLE IF EXISTS team_info;
 
 
-
 CREATE TABLE team_info (
 	"team_id" int,
 	"franchiseId" int,
@@ -23,7 +22,6 @@ CREATE TABLE team_info (
 	"link" varchar(30),
 	PRIMARY KEY ("team_id")
 );
-
 
 
 CREATE TABLE game (
@@ -46,7 +44,6 @@ CREATE TABLE game (
 );
 
 
-
 CREATE TABLE player_info (
 	"player_id" int,
 	"firstName" varchar,
@@ -62,7 +59,6 @@ CREATE TABLE player_info (
 	"shootsCatches" varchar(3),
 	PRIMARY KEY ("player_id")
 );
-
 
 
 CREATE TABLE game_plays (
@@ -85,9 +81,8 @@ CREATE TABLE game_plays (
 	"st_x" float,
 	"st_y" float,
 	PRIMARY KEY ("play_id"),
-	FOREIGN KEY ("game_id") REFERENCES game("game_id")
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id")
 );
-
 
 
 CREATE TABLE game_teams_stats (
@@ -108,19 +103,17 @@ CREATE TABLE game_teams_stats (
 	"takeaways" int,
 	"blocked" int,
 	"startRinkSide" varchar(5),
-	FOREIGN KEY ("game_id") REFERENCES game("game_id")
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id")
 );
-
 
 
 CREATE TABLE game_scratches (
 	"game_id" int,
 	"team_id" int,
 	"player_id" int,  -- needs foreign key after CREATE TABLE
-	FOREIGN KEY ("game_id") REFERENCES game("game_id"),
-	FOREIGN KEY ("team_id") REFERENCES team_info("team_id")
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id"),
+	FOREIGN KEY ("team_id") REFERENCES team_info ("team_id")
 );
-
 
 
 CREATE TABLE game_officials (
@@ -128,7 +121,7 @@ CREATE TABLE game_officials (
 	"official_name" varchar(100),
 	"official_type" varchar(15),
 	--PRIMARY KEY (id),
-	FOREIGN KEY ("game_id") REFERENCES game("game_id")
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id")
 );
 
 
@@ -138,9 +131,8 @@ CREATE TABLE game_shifts (
 	"period" int,
 	"shift_start" int,
 	"shift_end" float,
-	FOREIGN KEY ("game_id") REFERENCES game("game_id")
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id")
 );
-
 
 
 CREATE TABLE game_penalties (
@@ -148,7 +140,6 @@ CREATE TABLE game_penalties (
 	"penaltySeverity" text,
 	"penaltyMinutes" int
 );
-
 
 
 CREATE TABLE game_skater_stats (
@@ -174,9 +165,8 @@ CREATE TABLE game_skater_stats (
 	"eventimeonice" int,
 	"shorthandedtimeonice" int,
 	"powerplaytimeonice" int,
-	FOREIGN KEY (game_id) REFERENCES game(game_id)
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id")
 );
-
 
 
 CREATE TABLE game_goalie_stats (
@@ -199,17 +189,18 @@ CREATE TABLE game_goalie_stats (
 	"savePercentage" float,
 	"powerPlaySavePercentage" float,
 	"evenStrengthSavePercentage" float,
-	FOREIGN KEY ("game_id") REFERENCES game("game_id")
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id")
 );
-
 
 
 CREATE TABLE game_plays_players (
 	"play_id" text,  -- foreign key, add
-	"game_id" int,  -- foreign key, add
+	"game_id" int,
 	"player_id" int,  -- foreign key, add
-	"playertype" varchar(30)--,
-	--FOREIGN KEY ("play_id") REFERENCES game_plays("play_id")
+	"playertype" varchar(30),
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id"),
+	FOREIGN KEY ("player_id") REFERENCES player_info ("player_id")
+	--FOREIGN KEY ("play_id") REFERENCES game_plays("play_id")   this one fails, play_id doesnt exist in source table
 );
 
 
@@ -219,6 +210,3 @@ CREATE TABLE game_goals (
 	"gameWinningGoal" boolean,
 	"emptyNet" boolean
 );
-
-
-
