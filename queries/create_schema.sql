@@ -103,8 +103,7 @@ CREATE TABLE game_teams_stats (
 	"takeaways" int,
 	"blocked" int,
 	"startRinkSide" varchar(5),
-	FOREIGN KEY ("game_id") REFERENCES game ("game_id"),
-	FOREIGN KEY ("team_id") REFERENCES team_info ("team_id")
+	FOREIGN KEY ("game_id") REFERENCES game ("game_id")
 );
 
 
@@ -169,8 +168,7 @@ CREATE TABLE game_skater_stats (
 	"shorthandedtimeonice" int,
 	"powerplaytimeonice" int,
 	FOREIGN KEY ("game_id") REFERENCES game ("game_id"),
-	FOREIGN KEY ("player_id") REFERENCES player_info ("player_id"),
-	FOREIGN KEY ("team_id") REFERENCES team_info ("team_id")	
+	FOREIGN KEY ("player_id") REFERENCES player_info ("player_id")
 );
 
 
@@ -195,8 +193,7 @@ CREATE TABLE game_goalie_stats (
 	"powerPlaySavePercentage" float,
 	"evenStrengthSavePercentage" float,
 	FOREIGN KEY ("game_id") REFERENCES game ("game_id"),
-	FOREIGN KEY ("player_id") REFERENCES player_info ("player_id"),
-	FOREIGN KEY ("team_id") REFERENCES team_info ("team_id")
+	FOREIGN KEY ("player_id") REFERENCES player_info ("player_id")
 );
 
 
