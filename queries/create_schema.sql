@@ -204,7 +204,7 @@ CREATE TABLE game_plays_players (
 	"playertype" varchar(30),
 	FOREIGN KEY ("game_id") REFERENCES game ("game_id"),
 	FOREIGN KEY ("player_id") REFERENCES player_info ("player_id")
-	--FOREIGN KEY ("play_id") REFERENCES game_plays("play_id")   this one fails, play_id doesnt exist in source table
+	--FOREIGN KEY ("play_id") REFERENCES game_plays("play_id")   this one fails, one of the play_id's doesnt have match in REFERENCES game_plays table
 );
 
 

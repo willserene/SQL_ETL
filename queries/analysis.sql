@@ -7,6 +7,9 @@ FROM game_skater_stats gss
 GROUP BY gss.player_id
 ;
 
+/*
+Top 10 Nations for Total Goals Made by Players (all history)
+*/
 SELECT 
   pi.nationality, 
   sum(gss.goals) AS total_goals
