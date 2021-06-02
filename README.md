@@ -31,13 +31,13 @@
 
 If data was publicly available, how would you obtain it?
 
-*  The project connects to Kaggle via API token using Python.  It downloads-and-unzips all files from the NHL Hockey source, which includes 13 CSVs and an ERD.
-*  Using pandas, the CSVs are loaded to dataframes.  These dataframes are prepared/transformed for their final migration to a PostgreSQL database.
-*  We SQL and pgAdmin to create the database schema.  This establishes the mini-warehouse for all hockey data from which analysis can be performed.
-*  The Jupyter Notebook uses pands to_sql(), as well as a custom function using execute_values() from psycopg2, to load the transformed dataframes to the appropriate PostgresSQL database tables.
+*  Connects to Kaggle via API token using Python.  It extracts-and-unzips all files from the NHL Hockey source, which includes 13 CSVs.
+*  Using pandas, CSVs are loaded to dataframes then prepared/transformed for their final migration to a PostgreSQL database.
+*  PostgreSQL and pgAdmin were used to establish a mini-warehouse for all hockey data for analysis.
+*  The Jupyter Notebook uses pandas to_sql(), as well as a custom function using execute_values() from psycopg2, to load the transformed data to the appropriate database tables.
 *  Queries analyzing the data have been written in SQL.
 
-Each dataframe load to SQL prints an execution time (modular) and a total process run time.
+Each dataframe load-to-PostgreSQL prints an execution time (modular), and the notebook also tracks the total process run time.
 
 
 <!-- BUILT WITH -->
