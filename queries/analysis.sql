@@ -16,24 +16,32 @@ LIMIT 10
 
 
 /*
-Wins by Coach (for each team coached)
+Wins by Coach (for each team coached) having played at least 50 games
 */
-SELECT 
-	gts.head_coach as "Head Coach",
-	ti."shortName" || ' ' || ti."teamName" as "Team",
-	count(gts.won) filter (where gts.won) as "Games Won",
-	count(gts.won) as "Total Games"
-FROM game_teams_stats gts
-JOIN team_info ti on ti.team_id = gts.team_id
-WHERE gts.head_coach is not null
-GROUP BY gts.head_coach, ti."shortName" || ' ' || ti."teamName"
-ORDER BY gts.head_coach
+WITH game_coaches as (
+	SELECT 
+	  gts.head_coach,
+	  ti."shortName" || ' ' || ti."teamName" as team_name,
+	  sum(CASE WHEN gts.won = 'true' THEN 1 ELSE 0 END) as games_won,
+	  count(gts.won) as games_played
+	FROM game_teams_stats gts
+	JOIN team_info ti on ti.team_id = gts.team_id
+	WHERE gts.head_coach is not null
+	GROUP BY gts.head_coach, ti."shortName" || ' ' || ti."teamName"
+)
+SELECT
+  *,
+  (games_won::real / games_played::real) as win_percent
+FROM game_coaches
+WHERE games_played > 50
+ORDER BY (games_won::real / games_played::real) DESC
+LIMIT 10
 ;
 
 
 
 /*
-Top 10 Nations for Total Goals Made by Players (all history)
+Top 10 Nations for Total Goals Made by Players
 */
 SELECT 
   pi.nationality, 
